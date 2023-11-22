@@ -1,12 +1,57 @@
 <main>
     <app-logo></app-logo>
-    <form>
-        <input type="text" placeholder="Nome de usuário" name="username"/>
-        <input type="text" placeholder="E-mail" name="email"/>
-        <input type="text" placeholder="Imagem de usuário" name="iamge"/>
-        <input type="password" placeholder="Senha" name="password"/>
-        <input type="password" placeholder="Confirmação de senha" name="repeat-password"/>
+    <form (ngSubmit)="signUp()" [formGroup]="signupForm" #formDir="ngForm">
+        <input 
+            formControlName="username"
+            type="text"
+            placeholder="Nome de usuário"
+            name="username"
+            required
+        />
+        <p class="error" *ngIf="username?.errors?.['minlength'] && formDir.submitted">
+            username muito pequeno.
+        </p>
+        <input
+            formControlName="email"
+            type="text"
+            placeholder="E-mail"
+            name="email"
+            required
+        />
+        <p class="error" *ngIf="email?.errors?.['email'] && formDir.submitted">
+            E-mail inválido.
+        </p>
+        <input
+            formControlName="image"
+            type="text"
+            placeholder="Imagem de usuário"
+            name="image"
+            required
+        />
+        <p class="error" *ngIf="image?.errors?.['pattern'] && formDir.submitted">
+            imagem inválida.
+        </p>
+        <input
+            formControlName="password"
+            type="password"
+            placeholder="Senha"
+            name="password"
+            required
+        />
+        <p class="error" *ngIf="password?.errors?.['minlength'] && formDir.submitted">
+            Senha inválida.
+        </p>
+        <input
+            formControlName="password"
+            type="password"
+            placeholder="Confirmação de senha"
+            name="repeat-password"
+            required
+        />
+        <p class="error" *ngIf="password?.errors?.['minlength'] && formDir.submitted">
+            Senha inválida.
+        </p>
         <button type="submit">Cadastrar-se</button>
-        <a href="">Entrar na sua conta</a>
+        <a routerLink="/">Entrar na sua conta</a>
     </form>
 </main>
