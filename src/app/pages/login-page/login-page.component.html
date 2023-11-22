@@ -1,9 +1,27 @@
 <main>
-    <app-logo></app-logo>
-    <form>
-        <input type="text" placeholder="email"/>
-        <input type="password" placeholder="senha"/>
-        <button type="submit">Entrar</button>
-        <a href="signup">Não tem conta? Registre-se</a>
-    </form>
+  <app-logo></app-logo>
+  <form (ngSubmit)="login()" [formGroup]="loginForm" #formDir="ngForm">
+    <input
+      formControlName="email"
+      name="email"
+      type="email"
+      placeholder="email"
+      required
+    />
+    <p class="error" *ngIf="email?.errors?.['email'] && formDir.submitted">
+      Email inválido.
+    </p>
+    <input
+      formControlName="password"
+      name="password"
+      type="password"
+      placeholder="senha"
+      required
+    />
+    <p class="error" *ngIf="password?.errors?.['minlength'] && formDir.submitted">
+        Senha inválida.
+    </p>
+    <button type="submit">Entrar</button>
+    <a routerLink="/signup">Não tem conta? Registre-se</a>
+  </form>
 </main>
